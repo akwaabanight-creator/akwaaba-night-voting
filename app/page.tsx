@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const categories = [
   { name: "Best Performer", description: "Celebrate outstanding stage performances." },
   { name: "Best New Act", description: "Recognise a rising star." },
@@ -8,10 +10,10 @@ export default function Home() {
   return (
     <main>
       <header className="topbar">
-        <a className="brand" href="/" aria-label="Akwaaba Night home">
+        <Link className="brand" href="/" aria-label="Akwaaba Night home">
           <span className="brand-mark">A</span>
           <span>AKWAABA <b>NIGHT</b></span>
-        </a>
+        </Link>
         <span className="status">VOTING PORTAL PREVIEW</span>
       </header>
 
