@@ -259,32 +259,40 @@ export default function AdminDashboard() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-100 p-4 sm:p-8">
+    <main className="min-h-screen bg-slate-50 p-4 sm:p-8">
       <div className="mx-auto max-w-6xl">
-        <header className="mb-8 flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold text-slate-900">
-              Akwaaba Night
-            </h1>
-            <p className="mt-1 text-slate-600">
-              Administrator Dashboard
-            </p>
+        <header className="mb-6 overflow-hidden rounded-2xl bg-slate-950 text-white shadow-lg">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-5 py-5 sm:px-8">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-amber-400">Akwaaba Night</p>
+              <h1 className="mt-2 text-3xl font-extrabold sm:text-4xl">Administrator Dashboard</h1>
+              <p className="mt-2 text-sm text-slate-300">Manage awards and nominees from one place.</p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-2 text-xs font-semibold text-amber-300">ADMIN AREA</span>
+              <button
+                onClick={handleLogout}
+                className="rounded-lg bg-white px-4 py-2 font-semibold text-slate-900 transition hover:bg-amber-300"
+              >
+                Sign out
+              </button>
+            </div>
           </div>
-
-          <button
-            onClick={handleLogout}
-            className="rounded-md border bg-white px-4 py-2"
-          >
-            Sign out
-          </button>
+          <nav aria-label="Administrator navigation" className="flex flex-wrap gap-2 px-5 py-4 sm:px-8">
+            <a href="/admin" className="rounded-lg bg-amber-400 px-4 py-2 text-sm font-bold text-slate-950">Dashboard</a>
+            <a href="/admin/categories" className="rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10">Manage Categories</a>
+            <a href="/admin#nominees" className="rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10">Manage Nominees</a>
+          </nav>
         </header>
 
-        <section className="mb-8 rounded-xl border border-amber-300 bg-amber-50 p-5">
-          <h2 className="font-bold text-amber-900">Preview mode</h2>
-          <p className="mt-2 text-sm text-amber-900">
-            Voting and payments are disabled. Nominee management is
-            available to authorized administrators only.
-          </p>
+        <section className="mb-8 flex items-start gap-4 rounded-2xl border border-amber-300 bg-amber-50 p-5 shadow-sm">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-amber-200 text-xl" aria-hidden="true">!</div>
+          <div>
+            <h2 className="font-bold text-amber-950">Preview mode — voting and payments are OFF</h2>
+            <p className="mt-1 text-sm leading-6 text-amber-900">
+              This website is being prepared. No votes or payments can be made. Only authorized administrators can manage award information.
+            </p>
+          </div>
         </section>
 
         {error && (
@@ -299,20 +307,28 @@ export default function AdminDashboard() {
           </p>
         )}
 
-        <section className="mb-8 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-xl bg-white p-6 shadow-sm">
-            <p className="text-sm text-slate-500">Award categories</p>
-            <p className="mt-2 text-3xl font-bold">{categories.length}</p>
+        <section className="mb-8 grid gap-5 sm:grid-cols-2">
+          <div className="rounded-2xl border border-slate-200 border-t-4 border-t-amber-400 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-sm font-semibold text-slate-600">Award categories</p>
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100 text-lg" aria-hidden="true">◆</span>
+            </div>
+            <p className="mt-3 text-4xl font-extrabold tracking-tight text-slate-950">{categories.length}</p>
+            <p className="mt-1 text-sm text-slate-500">Categories in your awards setup</p>
           </div>
 
-          <div className="rounded-xl bg-white p-6 shadow-sm">
-            <p className="text-sm text-slate-500">Nominees</p>
-            <p className="mt-2 text-3xl font-bold">{nominees.length}</p>
+          <div className="rounded-2xl border border-slate-200 border-t-4 border-t-blue-900 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-sm font-semibold text-slate-600">Nominees</p>
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-lg" aria-hidden="true">♙</span>
+            </div>
+            <p className="mt-3 text-4xl font-extrabold tracking-tight text-slate-950">{nominees.length}</p>
+            <p className="mt-1 text-sm text-slate-500">Nominees across all categories</p>
           </div>
         </section>
 
-        <section className="mb-8 rounded-xl bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-xl font-bold">
+        <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 className="mb-5 text-xl font-extrabold text-slate-950">
             {editingId ? 'Edit nominee' : 'Add a nominee'}
           </h2>
 
@@ -327,7 +343,7 @@ export default function AdminDashboard() {
                 onChange={(event) => setName(event.target.value)}
                 required
                 maxLength={150}
-                className="w-full rounded-md border border-slate-300 p-3"
+                className="w-full rounded-xl border border-slate-300 bg-white p-3 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
                 placeholder="Enter nominee's full name"
               />
             </div>
@@ -370,7 +386,7 @@ export default function AdminDashboard() {
               <button
                 type="submit"
                 disabled={saving || categories.length === 0}
-                className="rounded-md bg-slate-900 px-5 py-3 font-semibold text-white disabled:opacity-50"
+                className="rounded-xl bg-slate-950 px-5 py-3 font-semibold text-white transition hover:bg-blue-900 disabled:opacity-50"
               >
                 {saving
                   ? 'Saving...'
@@ -392,8 +408,8 @@ export default function AdminDashboard() {
           </form>
         </section>
 
-        <section className="rounded-xl bg-white p-6 shadow-sm">
-          <h2 className="mb-5 text-xl font-bold">
+        <section id="nominees" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 className="mb-5 text-xl font-extrabold text-slate-950">
             Manage nominees
           </h2>
 
@@ -470,7 +486,7 @@ export default function AdminDashboard() {
           })}
         </section>
 
-        <p className="mt-6 text-center text-sm text-slate-500">
+        <p className="mt-6 rounded-xl border border-slate-200 bg-white p-4 text-center text-sm text-slate-500">
           Akwaaba Night administration · Voting and payments disabled
         </p>
       </div>
