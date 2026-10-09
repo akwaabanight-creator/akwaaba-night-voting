@@ -8,52 +8,23 @@
   --gold-dark: #b98835;
   --line: rgba(232, 187, 99, 0.23);
 }
-
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  background: var(--background);
-  color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.6;
-}
+body { margin: 0; background: var(--background); color: var(--text); font-family: Arial, Helvetica, sans-serif; line-height: 1.6; }
 a { color: inherit; text-decoration: none; }
 main { min-height: 100vh; overflow: hidden; }
-.topbar {
-  display: flex; justify-content: space-between; align-items: center;
-  gap: 1rem; padding: 1.4rem clamp(1.25rem, 6vw, 5rem);
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
+.topbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.4rem clamp(1.25rem, 6vw, 5rem); border-bottom: 1px solid rgba(255,255,255,.08); }
 .brand { display: inline-flex; align-items: center; gap: .75rem; letter-spacing: .12em; font-size: .88rem; }
 .brand b { color: var(--gold); }
-.brand-mark {
-  display: grid; place-items: center; width: 2.4rem; height: 2.4rem;
-  border: 1px solid var(--gold); color: var(--gold); border-radius: 50%;
-  font-family: Georgia, serif; font-size: 1.4rem;
-}
-.status {
-  color: var(--gold); border: 1px solid var(--line); border-radius: 999px;
-  padding: .4rem .75rem; font-size: .68rem; letter-spacing: .1em;
-}
-.hero {
-  padding: clamp(4.5rem, 10vw, 8rem) 1.5rem 5rem;
-  text-align: center;
-  background: radial-gradient(ellipse at 50% 0%, rgba(185,136,53,.18), transparent 58%);
-}
+.brand-mark { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border: 1px solid var(--gold); color: var(--gold); border-radius: 50%; font-family: Georgia, serif; font-size: 1.4rem; }
+.status { color: var(--gold); border: 1px solid var(--line); border-radius: 999px; padding: .4rem .75rem; font-size: .68rem; letter-spacing: .1em; }
+.hero { padding: clamp(4.5rem, 10vw, 8rem) 1.5rem 5rem; text-align: center; background: radial-gradient(ellipse at 50% 0%, rgba(185,136,53,.18), transparent 58%); }
 .eyebrow { color: var(--gold); font-size: .73rem; font-weight: 700; letter-spacing: .2em; }
 h1, h2, h3, p { margin-top: 0; }
-h1 {
-  margin: 1.25rem 0; font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3.6rem, 10vw, 7.5rem); line-height: .98; letter-spacing: -.055em;
-}
+h1 { margin: 1.25rem 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(3.6rem, 10vw, 7.5rem); line-height: .98; letter-spacing: -.055em; }
 h1 span { color: var(--gold); font-style: italic; }
 .intro { max-width: 38rem; margin: 0 auto 2rem; color: var(--muted); font-size: 1.05rem; }
-.notice {
-  display: flex; flex-direction: column; gap: .2rem; max-width: 35rem;
-  margin: 0 auto; padding: 1rem 1.25rem; text-align: left;
-  border: 1px solid var(--line); border-radius: .8rem; background: rgba(25,25,31,.88);
-}
+.notice { display: flex; flex-direction: column; gap: .2rem; max-width: 35rem; margin: 0 auto; padding: 1rem 1.25rem; text-align: left; border: 1px solid var(--line); border-radius: .8rem; background: rgba(25,25,31,.88); }
 .notice strong { color: var(--gold); }
 .notice span { color: var(--muted); font-size: .9rem; }
 .categories, .how-it-works { padding: 4rem clamp(1.25rem, 6vw, 5rem); }
@@ -61,30 +32,23 @@ h1 span { color: var(--gold); font-style: italic; }
 h2 { margin-bottom: .75rem; font: 600 clamp(2rem, 4vw, 3.2rem)/1.1 Georgia, "Times New Roman", serif; }
 .section-heading > p:last-child, .category-card p, .steps p { color: var(--muted); }
 .card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; max-width: 74rem; margin: auto; }
-.category-card {
-  min-height: 14rem; padding: 1.5rem; border: 1px solid var(--line);
-  border-radius: 1rem; background: linear-gradient(145deg, #1d1c20, #141419);
-}
+.category-card { min-height: 14rem; padding: 1.5rem; border: 1px solid var(--line); border-radius: 1rem; background: linear-gradient(145deg, #1d1c20, #141419); }
 .card-number { color: var(--gold); font-size: .8rem; letter-spacing: .12em; }
 .category-card h3 { margin: 1.5rem 0 .5rem; font: 600 1.5rem Georgia, "Times New Roman", serif; }
 .category-card p { min-height: 3rem; font-size: .92rem; }
 .coming-soon { color: var(--gold); font-size: .78rem; }
+.data-message { max-width: 46rem; margin: 0 auto; padding: 1.25rem 1.5rem; color: var(--muted); text-align: center; border: 1px solid var(--line); border-radius: .8rem; background: rgba(25,25,31,.65); }
+.nominee-list { list-style: none; padding: 0; margin: 1.25rem 0 0; display: grid; gap: .8rem; }
+.nominee-list li { display: flex; align-items: center; gap: .8rem; padding-top: .8rem; border-top: 1px solid rgba(255,255,255,.08); }
+.nominee-image { width: 3rem; height: 3rem; object-fit: cover; border-radius: 50%; border: 1px solid var(--line); }
+.nominee-list li > span { display: flex; flex-direction: column; gap: .2rem; }
+.nominee-list strong { font-size: .92rem; font-weight: 600; }
+.nominee-list small { color: var(--muted); font-size: .8rem; }
 .how-it-works { background: #17171c; text-align: center; }
 .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; max-width: 68rem; margin: 3rem auto 0; text-align: left; }
 .steps > div { border-top: 1px solid var(--line); padding-top: 1.2rem; }
 .steps span { color: var(--gold); font-size: .8rem; letter-spacing: .12em; }
 .steps h3 { margin: .8rem 0 .4rem; font: 600 1.4rem Georgia, "Times New Roman", serif; }
 .steps p { font-size: .92rem; }
-footer {
-  display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-  padding: 1.5rem clamp(1.25rem, 6vw, 5rem); color: var(--muted); font-size: .8rem;
-  border-top: 1px solid rgba(255,255,255,.08);
-}
-@media (max-width: 700px) {
-  .topbar { align-items: flex-start; flex-direction: column; }
-  .card-grid, .steps { grid-template-columns: 1fr; }
-  .category-card { min-height: auto; }
-  .category-card p { min-height: auto; }
-  .hero { padding-top: 4rem; }
-  footer { flex-direction: column; }
-}
+footer { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: 1.5rem clamp(1.25rem, 6vw, 5rem); color: var(--muted); font-size: .8rem; border-top: 1px solid rgba(255,255,255,.08); }
+@media (max-width: 700px) { .topbar { align-items: flex-start; flex-direction: column; } .card-grid, .steps { grid-template-columns: 1fr; } .category-card { min-height: auto; } .category-card p { min-height: auto; } .hero { padding-top: 4rem; } footer { flex-direction: column; } }
