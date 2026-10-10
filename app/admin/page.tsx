@@ -28,6 +28,7 @@ export default function AdminDashboard() {
   const [email, setEmail] = useState('')
   const [categories, setCategories] = useState<Category[]>([])
   const [nominees, setNominees] = useState<Nominee[]>([])
+  const [searchTerm, setSearchTerm] = useState('')
 
   const [name, setName] = useState('')
   const [categoryId, setCategoryId] = useState('')
@@ -472,9 +473,33 @@ export default function AdminDashboard() {
             Manage nominees
           </h2>
 
+          <div className="mb-6">
+            <label htmlFor="nominee-search" className="mb-2 block font-semibold text-slate-950">
+              Search nominees
+            </label>
+            <input
+              id="nominee-search"
+              type="search"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              placeholder="Type a nominee name or description..."
+              className="w-full rounded-xl border border-slate-300 bg-white p-3 text-slate-950 placeholder:text-slate-500 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+            />
+            {searchTerm.trim() && (
+              <p className="mt-2 text-sm text-slate-600">
+                Showing nominees matching “{searchTerm.trim()}”.
+              </p>
+            )}
+          </div>
+
           {categories.map((category) => {
+            const term = searchTerm.trim().toLowerCase()
             const categoryNominees = nominees.filter(
-              (nominee) => nominee.category_id === category.id
+              (nominee) =>
+                nominee.category_id === category.id &&
+                (!term ||
+                  nominee.name.toLowerCase().includes(term) ||
+                  (nominee.description ?? '').toLowerCase().includes(term))
             )
 
             return (
