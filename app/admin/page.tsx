@@ -297,9 +297,9 @@ export default function AdminDashboard() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 p-4 sm:p-8">
+    <main className="min-h-screen bg-slate-100 p-4 sm:p-8">
       <div className="mx-auto max-w-6xl">
-        <header className="mb-6 overflow-hidden rounded-2xl bg-slate-950 text-white shadow-lg">
+        <header className="mb-6 overflow-hidden rounded-2xl border border-amber-400/30 bg-gradient-to-r from-blue-950 via-slate-950 to-blue-900 text-white shadow-xl shadow-blue-950/10">
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-5 py-5 sm:px-8">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-amber-400">Akwaaba Night</p>
@@ -318,9 +318,9 @@ export default function AdminDashboard() {
           </div>
           <nav aria-label="Administrator navigation" className="flex flex-wrap gap-2 px-5 py-4 sm:px-8">
             <a href="#overview" className="rounded-lg bg-amber-400 px-4 py-2 text-sm font-bold text-slate-950">Dashboard overview</a>
-            <a href="/admin/categories" className="rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10">Manage Categories</a>
-            <a href="#nominee-form" className="rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10">Add nominee</a>
-            <a href="#nominees" className="rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10">Manage nominees</a>
+            <a href="/admin/categories" className="rounded-lg border border-white/25 px-4 py-2 text-sm font-semibold text-white transition hover:border-amber-300 hover:bg-white/10">Manage Categories</a>
+            <a href="#nominee-form" className="rounded-lg border border-white/25 px-4 py-2 text-sm font-semibold text-white transition hover:border-amber-300 hover:bg-white/10">Add nominee</a>
+            <a href="#nominees" className="rounded-lg border border-white/25 px-4 py-2 text-sm font-semibold text-white transition hover:border-amber-300 hover:bg-white/10">Manage nominees</a>
           </nav>
         </header>
 
