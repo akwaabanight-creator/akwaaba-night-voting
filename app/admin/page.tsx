@@ -530,7 +530,7 @@ export default function AdminDashboard() {
 
                             <button
                               onClick={() => togglePublished(nominee)}
-                              className="rounded-md border px-3 py-2 text-sm"
+                              className="rounded-md border border-slate-400 bg-white px-3 py-2 text-sm font-semibold text-slate-900 hover:bg-slate-100"
                             >
                               {nominee.is_active ? 'Unpublish' : 'Publish'}
                             </button>
