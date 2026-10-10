@@ -64,7 +64,10 @@ export default function AdminLoginPage() {
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label htmlFor="email" className="mb-1 block text-sm font-medium">
+            <label
+              htmlFor="email"
+              className="mb-1 block text-sm font-semibold text-slate-900"
+            >
               Email address
             </label>
             <input
@@ -74,14 +77,14 @@ export default function AdminLoginPage() {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               required
-              className="w-full rounded-md border border-slate-300 p-3"
+              className="w-full rounded-md border border-slate-400 bg-white p-3 text-slate-950 placeholder:text-slate-500"
             />
           </div>
 
           <div>
             <label
               htmlFor="password"
-              className="mb-1 block text-sm font-medium"
+              className="mb-1 block text-sm font-semibold text-slate-900"
             >
               Password
             </label>
@@ -92,7 +95,7 @@ export default function AdminLoginPage() {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               required
-              className="w-full rounded-md border border-slate-300 p-3"
+              className="w-full rounded-md border border-slate-400 bg-white p-3 text-slate-950 placeholder:text-slate-500"
             />
           </div>
 
