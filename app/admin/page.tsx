@@ -316,9 +316,10 @@ export default function AdminDashboard() {
             </div>
           </div>
           <nav aria-label="Administrator navigation" className="flex flex-wrap gap-2 px-5 py-4 sm:px-8">
-            <a href="/admin" className="rounded-lg bg-amber-400 px-4 py-2 text-sm font-bold text-slate-950">Dashboard</a>
+            <a href="#overview" className="rounded-lg bg-amber-400 px-4 py-2 text-sm font-bold text-slate-950">Dashboard overview</a>
             <a href="/admin/categories" className="rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10">Manage Categories</a>
-            <a href="/admin#nominees" className="rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10">Manage Nominees</a>
+            <a href="#nominee-form" className="rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10">Add nominee</a>
+            <a href="#nominees" className="rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10">Manage nominees</a>
           </nav>
         </header>
 
@@ -344,7 +345,7 @@ export default function AdminDashboard() {
           </p>
         )}
 
-        <section className="mb-8 grid gap-5 sm:grid-cols-2">
+        <section id="overview" className="mb-8 grid scroll-mt-6 gap-5 sm:grid-cols-2">
           <div className="rounded-2xl border border-slate-200 border-t-4 border-t-amber-400 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
             <div className="flex items-center justify-between gap-3">
               <p className="text-sm font-semibold text-slate-600">Award categories</p>
@@ -364,7 +365,7 @@ export default function AdminDashboard() {
           </div>
         </section>
 
-        <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <section id="nominee-form" className="mb-8 scroll-mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <h2 className="mb-5 text-xl font-extrabold text-slate-950">
             {editingId ? 'Edit nominee' : 'Add a nominee'}
           </h2>
@@ -466,7 +467,7 @@ export default function AdminDashboard() {
           </form>
         </section>
 
-        <section id="nominees" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <section id="nominees" className="scroll-mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <h2 className="mb-5 text-xl font-extrabold text-slate-950">
             Manage nominees
           </h2>
