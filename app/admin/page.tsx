@@ -14,6 +14,7 @@ type Nominee = {
   category_id: string
   name: string
   description: string | null
+  image_url: string | null
   is_active: boolean
 }
 
@@ -31,6 +32,7 @@ export default function AdminDashboard() {
   const [name, setName] = useState('')
   const [categoryId, setCategoryId] = useState('')
   const [description, setDescription] = useState('')
+  const [selectedImage, setSelectedImage] = useState<File | null>(null)
   const [editingId, setEditingId] = useState<string | null>(null)
 
   async function loadData() {
@@ -45,7 +47,7 @@ export default function AdminDashboard() {
 
     const { data: nomineeData, error: nomineeError } = await supabase
       .from('nominees')
-      .select('id, category_id, name, description, is_active')
+      .select('id, category_id, name, description, image_url, is_active')
       .order('name')
 
     if (nomineeError) throw nomineeError
@@ -98,6 +100,7 @@ export default function AdminDashboard() {
   function resetForm() {
     setName('')
     setDescription('')
+    setSelectedImage(null)
     setEditingId(null)
     setMessage('')
     setError('')
@@ -108,6 +111,7 @@ export default function AdminDashboard() {
     setName(nominee.name)
     setCategoryId(nominee.category_id)
     setDescription(nominee.description ?? '')
+    setSelectedImage(null)
     setMessage('')
     setError('')
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -128,6 +132,8 @@ export default function AdminDashboard() {
         description: description.trim() || null,
       }
 
+      let nomineeId = editingId
+
       if (editingId) {
         const { error } = await supabase
           .from('nominees')
@@ -135,31 +141,62 @@ export default function AdminDashboard() {
           .eq('id', editingId)
 
         if (error) throw error
-
-        setMessage('Nominee details updated successfully.')
       } else {
-        const { error } = await supabase.from('nominees').insert({
-          ...values,
-          is_active: false,
-        })
+        const { data: newNominee, error } = await supabase
+          .from('nominees')
+          .insert({
+            ...values,
+            is_active: false,
+          })
+          .select('id')
+          .single()
 
         if (error) throw error
+        nomineeId = newNominee.id
+      }
 
-        setMessage(
-          'Nominee added as unpublished. Publish only when ready.'
-        )
+      if (selectedImage && nomineeId) {
+        if (!selectedImage.type.startsWith('image/')) {
+          throw new Error('Please select an image file.')
+        }
+        if (selectedImage.size > 5 * 1024 * 1024) {
+          throw new Error('Please choose an image smaller than 5 MB.')
+        }
+
+        const safeFileName = selectedImage.name
+          .toLowerCase()
+          .replace(/[^a-z0-9.-]/g, '-')
+        const filePath = `${nomineeId}/${Date.now()}-${safeFileName}`
+
+        const { error: uploadError } = await supabase.storage
+          .from('nominee-images')
+          .upload(filePath, selectedImage, {
+            cacheControl: '3600',
+            contentType: selectedImage.type,
+            upsert: false,
+          })
+
+        if (uploadError) throw uploadError
+
+        const { data: publicUrlData } = supabase.storage
+          .from('nominee-images')
+          .getPublicUrl(filePath)
+
+        const { error: imageUpdateError } = await supabase
+          .from('nominees')
+          .update({ image_url: publicUrlData.publicUrl })
+          .eq('id', nomineeId)
+
+        if (imageUpdateError) throw imageUpdateError
       }
 
       resetForm()
       await loadData()
-
-      if (!editingId) {
-        setMessage(
-          'Nominee added as unpublished. Publish only when ready.'
-        )
-      } else {
-        setMessage('Nominee details updated successfully.')
-      }
+      setMessage(
+        editingId
+          ? 'Nominee details saved successfully.'
+          : 'Nominee added as unpublished. Publish only when ready.'
+      )
     } catch (err) {
       setError(
         err instanceof Error
@@ -382,6 +419,27 @@ export default function AdminDashboard() {
               />
             </div>
 
+            <div>
+              <label htmlFor="nominee-image" className="mb-1 block font-medium">
+                Nominee picture (optional)
+              </label>
+              <input
+                id="nominee-image"
+                type="file"
+                accept="image/*"
+                onChange={(event) => setSelectedImage(event.target.files?.[0] ?? null)}
+                className="w-full rounded-xl border border-slate-300 bg-white p-3"
+              />
+              <p className="mt-1 text-sm text-slate-500">
+                Choose a picture from your laptop. Images up to 5 MB are accepted. You can also use this dashboard from your phone.
+              </p>
+              {selectedImage && (
+                <p className="mt-1 text-sm text-slate-700">
+                  Selected: {selectedImage.name}
+                </p>
+              )}
+            </div>
+
             <div className="flex flex-wrap gap-3">
               <button
                 type="submit"
@@ -437,6 +495,14 @@ export default function AdminDashboard() {
                       >
                         <div className="flex flex-wrap items-start justify-between gap-3">
                           <div>
+                            {nominee.image_url && (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={nominee.image_url}
+                                alt={`${nominee.name} nominee`}
+                                className="mb-3 h-20 w-20 rounded-xl border border-slate-200 object-cover"
+                              />
+                            )}
                             <p className="font-semibold">{nominee.name}</p>
                             {nominee.description && (
                               <p className="mt-1 text-sm text-slate-600">
