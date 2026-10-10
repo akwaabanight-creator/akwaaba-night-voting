@@ -380,7 +380,7 @@ export default function AdminDashboard() {
                 onChange={(event) => setName(event.target.value)}
                 required
                 maxLength={150}
-                className="w-full rounded-xl border border-slate-300 bg-white p-3 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
+                className="w-full rounded-xl border border-slate-300 bg-white p-3 text-slate-950 placeholder:text-slate-500 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
                 placeholder="Enter nominee's full name"
               />
             </div>
