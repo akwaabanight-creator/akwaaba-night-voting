@@ -371,7 +371,7 @@ export default function AdminDashboard() {
 
           <form onSubmit={handleSave} className="space-y-4">
             <div>
-              <label htmlFor="nominee-name" className="mb-1 block font-medium">
+              <label htmlFor="nominee-name" className="mb-1 block font-semibold text-slate-950">
                 Nominee name
               </label>
               <input
@@ -386,7 +386,7 @@ export default function AdminDashboard() {
             </div>
 
             <div>
-              <label htmlFor="category" className="mb-1 block font-medium">
+              <label htmlFor="category" className="mb-1 block font-semibold text-slate-950">
                 Award category
               </label>
               <select
@@ -394,7 +394,7 @@ export default function AdminDashboard() {
                 value={categoryId}
                 onChange={(event) => setCategoryId(event.target.value)}
                 required
-                className="w-full rounded-md border border-slate-300 p-3"
+                className="w-full rounded-md border border-slate-300 bg-white p-3 text-slate-950 placeholder:text-slate-500"
               >
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
@@ -405,7 +405,7 @@ export default function AdminDashboard() {
             </div>
 
             <div>
-              <label htmlFor="description" className="mb-1 block font-medium">
+              <label htmlFor="description" className="mb-1 block font-semibold text-slate-950">
                 Description (optional)
               </label>
               <textarea
@@ -420,7 +420,7 @@ export default function AdminDashboard() {
             </div>
 
             <div>
-              <label htmlFor="nominee-image" className="mb-1 block font-medium">
+              <label htmlFor="nominee-image" className="mb-1 block font-semibold text-slate-950">
                 Nominee picture (optional)
               </label>
               <input
@@ -428,7 +428,7 @@ export default function AdminDashboard() {
                 type="file"
                 accept="image/*"
                 onChange={(event) => setSelectedImage(event.target.files?.[0] ?? null)}
-                className="w-full rounded-xl border border-slate-300 bg-white p-3"
+                className="w-full rounded-xl border border-slate-300 bg-white p-3 text-slate-950 file:mr-3 file:rounded-md file:border-0 file:bg-slate-200 file:px-3 file:py-2 file:font-semibold file:text-slate-900"
               />
               <p className="mt-1 text-sm text-slate-500">
                 Choose a picture from your laptop. Images up to 5 MB are accepted. You can also use this dashboard from your phone.
@@ -478,7 +478,7 @@ export default function AdminDashboard() {
 
             return (
               <div key={category.id} className="mb-6">
-                <h3 className="mb-3 border-b pb-2 font-bold">
+                <h3 className="mb-3 border-b border-slate-300 pb-2 font-bold text-slate-950">
                   {category.name} ({categoryNominees.length})
                 </h3>
 
